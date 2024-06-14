@@ -1,0 +1,22 @@
+name: 'Deploy Lambda Layer'
+description: 'Deploys Lambda layers using a custom script'
+author: 'Mohamed Navfar'
+
+inputs:
+  ARTIFACT_BUCKET:
+    description: 'Artifact bucket name'
+    required: true
+  LAMBDA_CONFIG_FILE:
+    description: 'Path to Lambda config file'
+    required: true
+  RUNNER_ID:
+    description: 'Runner ID'
+    required: true
+
+runs:
+  using: 'docker'
+  image: "Dockerfile"
+
+branding:
+  icon: "layers"
+  color: "gray-dark"
