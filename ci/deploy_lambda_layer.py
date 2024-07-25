@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 
 lambda_config_file = os.getenv("LAMBDA_CONFIG_FILE")
 artifact_bucket = os.getenv("ARTIFACT_BUCKET")
-runner_id = os.getenv("RUNNER_ID")
+artifact_path = os.getenv("ARTIFACT_PATH")
 
 lambda_client = boto3.client('lambda')
 
@@ -28,10 +28,10 @@ def publish_layer(layer_data):
                 LayerName=layer_name,
                 Content={
                     'S3Bucket': artifact_bucket,
-                    'S3Key': f"layer/{runner_id}/{zip_file_name}",
+                    'S3Key': f"{artifact_path}/{zip_file_name}",
                 },
                 CompatibleRuntimes=runtime,
-                CompatibleArchitectures=layer.get("layer_arch", ["x86_64"])
+                CompatibleArchitectures=layer.get("architecture", ["x86_64"])
             )
     except ClientError as e:
         logging.error(f"Error Publishing Layer Version: {e}")

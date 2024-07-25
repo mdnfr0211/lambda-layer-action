@@ -14,7 +14,7 @@ GitHub Action for deploying Lambda Layer code
                 "nodejs18.x"
             ],
             "zip_file_name": "layer.zip",
-            "layer_arch": [
+            "architecture": [
               "x86_64"
             ]
         }
@@ -44,15 +44,15 @@ jobs:
           aws-region: <AWS-REGION>
         
       - name: deploy lambda layer
-        uses: mdnfr0211/lambda-layer-action@v1
+        uses: mdnfr0211/lambda-layer-action@v2
         env:
-          RUNNER_ID: 1
           ARTIFACT_BUCKET: <ARTIFACT-BUCKET>
+          ARTIFACT_PATH: layer/<PATH>
           LAMBDA_CONFIG_FILE: <PATH-OF-JSON-FILE>
 
 ```
 
-The Lambda layer code(zip) should be structured under the artifact bucket in the format: `layer/<runner-id>/function.zip`.
+The Artifact Path is not required to include the zip file, It requires only the Path
 
 ## License
 
